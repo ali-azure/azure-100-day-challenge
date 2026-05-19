@@ -1,0 +1,5 @@
+"DisplayName","SignInName","RoleDefinitionName","Scope"
+"Madina Adow","madinaadow_outlook.com#EXT#@madinaadowoutlook.onmicrosoft.com","Owner","/subscriptions/b318641f-2d92-46c9-8763-c490a5dbf425"
+"Madina Adow","madinaadow_outlook.com#EXT#@madinaadowoutlook.onmicrosoft.com","Owner","/subscriptions/b318641f-2d92-46c9-8763-c490a5dbf425"
+"Test RBAC User 03","Testrbacuser03@madinaadowoutlook.onmicrosoft.com","Reader","/subscriptions/b318641f-2d92-46c9-8763-c490a5dbf425/resourceGroups/rg-rbac-practice"
+"Madina Adow","madinaadow_outlook.com#EXT#@madinaadowoutlook.onmicrosoft.com","Storage Blob Data Contributor","/subscriptions/b318641f-2d92-46c9-8763-c490a5dbf425/resourceGroups/rg-testquery/providers/Microsoft.Storage/storageAccounts/stquerydemo123"
