@@ -138,13 +138,14 @@ Tagging strategies play a key role in cost management, automation, and operation
 
 ## 📸 Screenshots  
 
-![01 – List Resource Groups](./screenshots/01-list-resource-groups.png)  
-![02 – Define Standard Tags](./screenshots/02-define-tags.png)  
-![03 – Automation Script](./screenshots/03-automation-script.png)  
-![04 – Script Execution](./screenshots/04-script-running.png)  
-![05 – Verify Tags via PowerShell](./screenshots/05-verify-tags.png)  
-![06 – CostCenter Validation](./screenshots/06-costcenter-validation.png)  
-![07 – Azure Portal Verification](./screenshots/07-portal-final.png)  
+![01 – PowerShell Session Ready](./screenshots/01-powershell-session-ready.png)  
+![02 – List Resource Groups and Tags](./screenshots/02-list-resource-groups-and-tags.png)  
+![03 – Standard Tags Hashtable](./screenshots/03-standard-tags-hashtable.png)  
+![04 – Automation Script Running](./screenshots/04-automation-script-running.png)  
+![05 – Verify Tags (Format-List)](./screenshots/05-verify-tags-format-list.png)  
+![06 – CostCenter Validation](./screenshots/06-validation-costcenter-check.png)  
+![07 – Azure Portal Final Verification](./screenshots/07-azure-portal-final-verification.png)
+
 
 ---
 
