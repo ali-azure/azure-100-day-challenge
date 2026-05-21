@@ -139,26 +139,13 @@ Troubleshooting requires checking DNS, network, and resource dependencies togeth
 
 ## 📸 Screenshots  
 
-### 1️⃣ Private DNS Zone — Created  
-![01 – DNS Zone Created](./screenshots/01-private-dns-zone-created.png)
-
-### 2️⃣ A‑Record — webserver → 10.0.0.10  
-![02 – A Record](./screenshots/02-a-record-webserver.png)
-
-### 3️⃣ VNet Link — Canada Central  
-![03 – VNet Link](./screenshots/03-vnet-link-creation.png)
-
-### 4️⃣ Azure CLI — DNS Zone Summary  
-![04 – CLI DNS Zone](./screenshots/04-zone-show-cli-output.png)
-
-### 5️⃣ Azure CLI — A‑Record Table  
-![05 – CLI A Record](./screenshots/05-a-record-list-cli.png)
-
-### 6️⃣ Azure CLI — VNet Link Table  
-![06 – CLI VNet Link](./screenshots/06-vnet-link-list-cli.png)
-
-### 7️⃣ nslookup — DNS Resolution Test  
-![07 – nslookup Test](./screenshots/07-nslookup-test.png)
+![01](./screenshots/01-private-dns-zone-created.png)
+![02](./screenshots/02-a-record-webserver.png)
+![03](./screenshots/03-vnet-link-creation.png)
+![04](./screenshots/04-zone-show-cli-output.png)
+![05](./screenshots/05-a-record-list-cli.png)
+![06](./screenshots/06-vnet-link-list-cli.png)
+![07](./screenshots/07-nslookup-test.png)
 
 
 ---
