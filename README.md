@@ -1,17 +1,18 @@
 # Azure 100 Day Cloud & Security Challenge
 
-Building hands-on Azure cloud administration, networking, governance, automation, and security skills through 100 real-world Azure labs and projects.
+Building hands-on experience across Azure administration, cloud security, networking, governance, monitoring, automation, and incident response through 100 real-world Azure implementation projects and operational tasks.
 
 This challenge focuses on practical implementation using live Azure environments — not simulations or sandbox-only exercises.
 
 ## Current Focus Areas
 
 - Azure Administration
-- Cloud Security
-- Networking
+- Cloud Security Engineering
+- Networking & Connectivity
+- Identity & Access Management (IAM)
 - Governance & Compliance
-- PowerShell Automation
-- Microsoft Sentinel
-- Defender for Cloud
-- Monitoring & Log Analytics
-- Identity & Access Management
+- Monitoring & Incident Response
+- PowerShell & Azure CLI Automation
+- Microsoft Sentinel & Defender for Cloud
+- Azure Policy & RBAC
+- Infrastructure Security & Operational Best Practices
