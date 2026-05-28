@@ -109,13 +109,13 @@ Identity is the foundation of all Azure access control.
 ## 📸 Screenshots  
 
 ```
-01-entra-overview.png  
-02-new-user-form.png  
-03-user-created.png  
-04-new-group-form.png  
-05-group-members.png  
-06a-cli-users.png  
-06b-cli-group-members.png  
+![01](./screenshots/01-entra-overview.png)
+![02](./screenshots/02-new-user-form.png)
+![03](./screenshots/03-user-created.png)
+![04](./screenshots/04-new-group-form.png)
+![05](./screenshots/05-group-members.png)
+![06a](./screenshots/06a-cli-users.png)
+![06b](./screenshots/06b-cli-group-members.png)
 ```
 
 ---
