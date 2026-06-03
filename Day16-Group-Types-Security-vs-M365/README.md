@@ -2,8 +2,6 @@
 
 **Azure 100 Days of Cloud Challenge — Ali Aden**
 
-**Folder Name:** `Day16-Manage-Group-Types`
-
 ---
 
 ## 📌 Overview
