@@ -108,15 +108,17 @@ Proper guest configuration is critical to maintaining a secure cloud environment
 
 ---
 
-## 📸 Screenshots  
+## 📸 Screenshots
 
-```
-01-invite-external-user.png  
-02-external-collaboration-settings.png  
-03-collaboration-restrictions.png  
-04-guest-user-profile.png  
-05-cli-guest-list.png  
-```
+![01 – Invite External User](./screenshots/01-invite-external-user.png)
+
+![02 – External Collaboration Settings](./screenshots/02-external-collaboration-settings.png)
+
+![03 – Collaboration Restrictions](./screenshots/03-collaboration-restrictions.png)
+
+![04 – Guest User Profile](./screenshots/04-guest-user-profile.png)
+
+![05 – CLI Guest List](./screenshots/05-cli-guest-list.png)
 
 ---
 
