@@ -52,9 +52,39 @@ Used Azure CLI in Windows PowerShell to verify the policy assignment and enforce
 
 ## 🏗️ Architecture Diagram
 
-![07 – Policy Architecture](./screenshots/07-policy-architecture.png)
+```text
+                    Azure Portal
+                           │
+                           ▼
 
-This diagram shows how the Allowed Locations policy is assigned, evaluated by Azure Policy, and enforced during resource deployment. Resources deployed in approved regions are allowed, while deployments in non-approved regions are denied and return a policy violation error.
+             Allowed Locations Policy
+                    (Built-in)
+
+                           │
+                           ▼
+
+                Policy Assignment
+                 Scope: Day17-RG
+
+                           │
+                           ▼
+
+            Azure Policy Evaluation
+
+                           │
+          ┌────────────────┴────────────────┐
+          │                                 │
+          ▼                                 ▼
+
+   UK South / UK West                East US
+
+       Allowed                        Denied
+
+          │                                 │
+          ▼                                 ▼
+
+  Resource Created            RequestDisallowedByPolicy
+```
 
 ---
 
