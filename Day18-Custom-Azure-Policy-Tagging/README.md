@@ -56,9 +56,45 @@ Captured evidence of policy creation, assignment, validation, and compliance res
 
 ## 🏗️ Architecture Diagram
 
-![06 – Policy Architecture Diagram](./screenshots/06-policy-architecture-diagram.png)
+```text
+                 Azure Subscription
+                          │
+                          ▼
 
-This diagram shows how a custom Azure Policy evaluates Storage Accounts within a Resource Group and audits resources that do not meet tagging requirements.
+                 Resource Group
+                    Day17-RG
+
+                          │
+                          ▼
+
+                 Storage Account
+                (Missing Tag)
+
+                          │
+                          ▼
+
+           Custom Azure Policy Definition
+    "Require Environment Tag on Storage Accounts"
+
+                          │
+                          ▼
+
+                Policy Assignment
+               Scope: Day17-RG
+
+                          │
+                          ▼
+
+             Azure Policy Evaluation
+
+                          │
+                          ▼
+
+               Compliance Result
+
+                   Non-Compliant
+            Environment Tag Missing
+```
 
 ---
 
