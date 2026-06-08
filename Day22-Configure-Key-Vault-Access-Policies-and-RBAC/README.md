@@ -8,7 +8,7 @@
 
 Today I configured and validated Azure Key Vault access using Azure Role-Based Access Control (RBAC). I created a dedicated Microsoft Entra ID test user, assigned the **Key Vault Secrets User** role, and verified role assignments using both the Azure Portal and Azure CLI.
 
-This lab demonstrates how Azure RBAC can be used to securely control access to secrets stored in Azure Key Vault while enforcing the principle of least privilege.
+This challenge demonstrates how Azure RBAC can be used to securely control access to secrets stored in Azure Key Vault while enforcing the principle of least privilege.
 
 ---
 
