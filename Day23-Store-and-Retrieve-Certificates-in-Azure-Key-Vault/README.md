@@ -216,5 +216,5 @@ lab-self-signed-cert  https://kv-ali-lab.vault.azure.net/...  2027-06-09T14:40:5
 
 ## 🎯 Key Takeaway
 
-Azure Key Vault simplifies certificate management by securely generating, storing, tracking, and validating certificates in a centralized location. By using Key Vault, organizations can reduce the risk of certificate-related outages, improve security, and better manage certificate lifecycle operations across cloud environments.
+Azure Key Vault simplifies certificate management by securely generating, storing, tracking, and validating certificates in a centralized location. By using Key Vault, organizations can reduce the risk of certificate-related outages, improve security, and better manage certificate lifecycle operations across cloud environments. 
 
