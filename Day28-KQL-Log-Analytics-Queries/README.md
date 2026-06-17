@@ -97,8 +97,6 @@ Retrieved the Log Analytics Workspace ID and executed KQL queries directly from 
 
 ---
 
-## Architecture Diagram
-
 ```text
 Azure Subscription / Key Vault / Resource Groups
                      │
@@ -131,6 +129,7 @@ Azure Subscription / Key Vault / Resource Groups
 ```
 
 This architecture demonstrates how Azure resources send activity and audit logs through Diagnostic Settings into a centralized Log Analytics workspace. KQL queries are used to filter, aggregate, and analyze the data to generate operational and security insights. Queries can be saved for reuse and validated programmatically using Azure CLI.
+
 ---
 
 ## Before & After
