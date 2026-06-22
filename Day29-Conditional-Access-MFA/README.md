@@ -180,7 +180,7 @@ Confirmed:
 **Screenshot**
 
 ```text
-screenshots/01-conditional-access-policy-list.png
+![Conditional Access Policy List](screenshots/01-conditional-access-policy-list.png)
 ```
 
 ### Validation 2 — Policy Details
@@ -196,7 +196,7 @@ Verified:
 **Screenshot**
 
 ```text
-screenshots/02-conditional-access-policy-details.png
+![Policy Details](screenshots/02-conditional-access-policy-details.png)
 ```
 
 ### Validation 3 — Microsoft Graph API Validation
@@ -225,7 +225,7 @@ Output:
 **Screenshot**
 
 ```text
-screenshots/03-cli-policy-validation.png
+![CLI Validation](screenshots/03-cli-policy-validation.png)
 ```
 
 ---
