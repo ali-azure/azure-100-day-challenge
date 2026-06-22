@@ -177,12 +177,10 @@ Confirmed:
 - Policy Name: Require MFA for All Users
 - State: Report-only
 
----
 **Screenshot**
 
 ![Conditional Access Policy List](screenshots/01-conditional-access-policy-list.png)
 
----
 
 ### Validation 2 — Policy Details
 
@@ -196,9 +194,8 @@ Verified:
 
 **Screenshot**
 
-```text
 ![Policy Details](screenshots/02-conditional-access-policy-details.png)
-```
+
 
 ### Validation 3 — Microsoft Graph API Validation
 
@@ -225,9 +222,8 @@ Output:
 
 **Screenshot**
 
-```text
 ![CLI Validation](screenshots/03-cli-policy-validation.png)
-```
+
 
 ---
 
