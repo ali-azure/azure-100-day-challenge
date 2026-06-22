@@ -177,11 +177,12 @@ Confirmed:
 - Policy Name: Require MFA for All Users
 - State: Report-only
 
+---
 **Screenshot**
 
-```text
 ![Conditional Access Policy List](screenshots/01-conditional-access-policy-list.png)
-```
+
+---
 
 ### Validation 2 — Policy Details
 
