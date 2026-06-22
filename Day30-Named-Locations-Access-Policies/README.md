@@ -181,7 +181,7 @@ Verified the Trusted Office Network location was created successfully.
 
 **Screenshot:**
 
-screenshots/01-trusted-office-network.png
+![Trusted Office Network](screenshots/01-trusted-office-network.png)
 
 ---
 
@@ -196,7 +196,7 @@ Confirmed:
 
 **Screenshot:**
 
-screenshots/02-named-locations-list.png
+![Named Locations List](screenshots/02-named-locations-list.png)
 
 ---
 
@@ -211,7 +211,7 @@ Verified the policy configuration including:
 
 **Screenshot:**
 
-screenshots/03-block-high-risk-countries-policy.png
+![Block High Risk Countries Policy](screenshots/03-block-high-risk-countries-policy.png)
 
 ---
 
@@ -229,7 +229,7 @@ is selected as the location condition.
 
 **Screenshot:**
 
-screenshots/04-high-risk-countries-condition.png
+![High Risk Countries Condition](screenshots/04-high-risk-countries-condition.png)
 
 ---
 
@@ -253,7 +253,7 @@ High Risk Countries
 
 **Screenshot:**
 
-screenshots/05-powershell-named-locations-validation.png
+![Powershell Named Location Validation](screenshots/05-powershell-named-locations-validation.png)
 
 ---
 
@@ -277,7 +277,7 @@ Block High Risk Countries      enabledForReportingButNotEnforced
 
 **Screenshot:**
 
-screenshots/06-powershell-policy-validation.png
+![Powershell Policy Validation](screenshots/06-powershell-policy-validation.png)
 
 ---
 
