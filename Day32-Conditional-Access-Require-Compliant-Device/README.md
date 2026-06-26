@@ -168,7 +168,7 @@ Confirmed:
 
 Validated the Conditional Access policy.
 
-**Command:**
+Command:
 
 ```powershell
 Get-MgIdentityConditionalAccessPolicy |
@@ -176,7 +176,7 @@ Where-Object {$_.DisplayName -eq "Require Compliant Device for Cloud Administrat
 Select-Object DisplayName, State
 ```
 
-**Output:**
+Output:
 
 ```text
 DisplayName                                       State
@@ -210,7 +210,7 @@ Confirmed:
 
 ### Validation 4 — Policy Configuration During Creation
 
-Verified each stage of the Conditional Access policy configuration during creation.
+Verified each stage of the policy configuration during creation.
 
 Confirmed:
 
@@ -220,18 +220,30 @@ Confirmed:
 * Require device to be marked as compliant
 * Report-only mode configured
 
+**Screenshots:**
+
+![Users Included](screenshots/01-users-include-cloud-administrators.png)
+
+![Users Excluded](screenshots/02-users-exclude-break-glass.png)
+
+![Target Resources](screenshots/03-target-resources-all-resources.png)
+
+![Grant Controls](screenshots/04-grant-require-compliant-device-configuration.png)
+
+![Report-only Mode](screenshots/05-policy-report-only-mode.png)
+
 ---
 
 ## Security Benefits
 
 This configuration provides:
 
-* Device-based access control for privileged administrators.
-* Protection against unmanaged or non-compliant devices.
-* Safe policy testing using Report-only mode.
-* Emergency administrative access through a Break Glass account.
-* Security group-based policy assignment for simplified administration.
-* Improved Zero Trust security posture.
+* Device-based access control for privileged administrators
+* Protection against unmanaged or non-compliant devices
+* Safe policy testing using Report-only mode
+* Emergency administrative access through a Break Glass account
+* Security group-based policy assignment for simplified administration
+* Improved Zero Trust security posture
 
 ---
 
@@ -255,57 +267,5 @@ This configuration provides:
 * Report-only mode should be used to safely evaluate policy impact before enforcing access controls.
 * Microsoft Graph PowerShell provides a reliable method for validating Conditional Access policy configurations.
 * This project demonstrates Conditional Access policy configuration and validation. Full enforcement testing requires an Intune-managed compliant device.
-
----
-
-## Screenshot Gallery
-
-The following screenshots provide a visual walkthrough of the configuration and validation process completed during this challenge.
-
-### 1. Cloud Administrators Security Group Included
-
-![](screenshots/01-users-include-cloud-administrators.png)
-
----
-
-### 2. Break Glass Administrator Excluded
-
-![](screenshots/02-users-exclude-break-glass.png)
-
----
-
-### 3. Target Resources – All Resources
-
-![](screenshots/03-target-resources-all-resources.png)
-
----
-
-### 4. Grant Control – Require Device to be Marked as Compliant
-
-![](screenshots/04-grant-require-compliant-device-configuration.png)
-
----
-
-### 5. Policy State – Report-only Mode
-
-![](screenshots/05-policy-report-only-mode.png)
-
----
-
-### 6. Conditional Access Policy Created
-
-![](screenshots/06-conditional-access-policy-list.png)
-
----
-
-### 7. Microsoft Graph PowerShell Validation
-
-![](screenshots/07-powershell-policy-validation.png)
-
----
-
-### 8. Policy Overview
-
-![](screenshots/08-policy-overview-summary.png)
 
 ---
