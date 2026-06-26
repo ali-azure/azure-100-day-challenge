@@ -208,7 +208,7 @@ Confirmed:
 
 ---
 
-### Validation 4 — Policy Configuration During Creation
+### Validation 4 — Policy Configuration Review
 
 Verified each stage of the policy configuration during creation.
 
@@ -226,7 +226,7 @@ Confirmed:
 
 ![Users Excluded](screenshots/02-users-exclude-break-glass.png)
 
-![Target Resources](screenshots/03-target-resources-all-resources.png)
+![Target Resources](screenshots/03-target-resources-all-cloud-apps.png)
 
 ![Grant Controls](screenshots/04-grant-require-compliant-device-configuration.png)
 
