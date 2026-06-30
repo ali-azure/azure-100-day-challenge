@@ -4,11 +4,11 @@
 
 ## Overview
 
-In this challenge, I learned how to securely grant temporary access to Azure Blob Storage using **Shared Access Signatures (SAS)**.
+In this project, I configured and validated Azure Shared Access Signatures (SAS) to securely provide temporary access to Azure Blob Storage.
 
-Rather than sharing storage account keys, I generated an **Account SAS** from the Azure Portal with least-privilege permissions, restricting access to Blob Storage resources for a limited time. I then validated the SAS by accessing a private blob through a web browser before generating a **User Delegation SAS** using Azure CLI and Microsoft Entra ID authentication.
+Rather than sharing Storage Account keys, I generated an Account SAS from the Azure Portal using least-privilege permissions to grant time-limited access to Blob Storage resources. I then validated the SAS by accessing a private blob through a web browser before generating a User Delegation SAS using Azure CLI with Microsoft Entra ID authentication.
 
-This challenge demonstrates how SAS tokens provide secure, temporary access to Azure Storage resources while reducing the security risks associated with sharing storage account keys.
+This project demonstrates how Shared Access Signatures enable secure, temporary access to Azure Storage resources while reducing the security risks associated with sharing long-lived Storage Account keys.
 
 ---
 
@@ -29,29 +29,34 @@ This challenge demonstrates how SAS tokens provide secure, temporary access to A
 ## Architecture Diagram
 
 ```text
-                    Azure Portal
-                           │
-                           ▼
-              Generate Account SAS
-                           │
-                           ▼
-                Azure Storage Account
-                 stazure100days01
-                           │
-                           ▼
-                 Blob Container
-                  day34-sas-demo
-                           │
-                           ▼
-                      sample.txt
-                           ▲
-                           │
-                   HTTPS + SAS Token
-                           │
-          ┌────────────────┴────────────────┐
-          │                                 │
-          ▼                                 ▼
-     Web Browser                 Azure CLI (PowerShell)
+                 Administrator
+                       │
+                       ▼
+                Azure Portal
+                       │
+             Generate Account SAS
+                       │
+                       ▼
+            Azure Storage Account
+             stazure100days01
+                       │
+                       ▼
+               Blob Container
+                day34-sas-demo
+                       │
+                       ▼
+                  sample.txt
+                       ▲
+                       │
+               HTTPS + SAS URL
+                       │
+              Web Browser Validation
+
+                       ▲
+                       │
+        Azure CLI (Microsoft Entra ID)
+                       │
+         Generate User Delegation SAS
 ```
 
 ---
@@ -60,7 +65,7 @@ This challenge demonstrates how SAS tokens provide secure, temporary access to A
 
 ### Step 1 — Create a Blob Container
 
-Created a private Blob Container that would be used to securely store a test file for SAS validation.
+Created a private Blob Container to securely store a test file for SAS validation.
 
 Configuration:
 
@@ -76,7 +81,7 @@ Private (No anonymous access)
 
 ### Step 2 — Upload a Test Blob
 
-Uploaded a simple text file to the container which would later be accessed using the generated SAS token.
+Uploaded a simple text file that would later be accessed using the generated SAS token.
 
 Configuration:
 
@@ -124,7 +129,7 @@ The configuration followed the principle of **least privilege** by granting only
 
 ### Step 4 — Generate the Account SAS
 
-Generated the Account SAS from the Azure Portal.
+Generated an Account SAS from the Azure Portal.
 
 The generated SAS included:
 
@@ -140,15 +145,15 @@ For security reasons, the SAS token, connection string and Blob Service SAS URL 
 
 ### Step 5 — Validate Blob Access
 
-Using the generated SAS URL, I successfully accessed the private blob directly from a web browser without exposing the Storage Account key.
+Validated that the generated SAS granted only the configured permissions within the defined validity period by accessing the private blob through a web browser.
 
-This confirmed that the SAS token granted only the configured permissions within the specified validity period.
+This confirmed that the Storage Account key was not required to access the protected resource.
 
 ---
 
 ### Step 6 — Generate a User Delegation SAS Using Azure CLI
 
-To understand both approaches to SAS generation, I also generated a **User Delegation SAS** using Azure CLI with Microsoft Entra ID authentication.
+Generated a User Delegation SAS using Azure CLI with Microsoft Entra ID authentication.
 
 Command:
 
@@ -163,7 +168,7 @@ az storage container generate-sas `
     --output tsv
 ```
 
-This demonstrated how Azure CLI can generate a SAS without using Storage Account keys.
+Unlike an Account SAS, a User Delegation SAS is signed using Microsoft Entra ID credentials rather than the Storage Account key, providing a more secure approach to delegated access where supported.
 
 ---
 
@@ -231,7 +236,7 @@ Confirmed:
 
 * Blob accessible using the SAS URL
 * Read permission successfully validated
-* Storage Account keys were not required
+* Storage Account key was not required
 
 **Screenshot:**
 
@@ -273,8 +278,8 @@ Validation confirmed:
 
 This implementation provides:
 
-* Eliminates the need to share Storage Account keys.
-* Grants temporary, time-limited access to Azure Storage.
+* Eliminates the need to expose Storage Account keys when granting temporary access.
+* Grants temporary, time-limited access to Azure Storage resources.
 * Applies the principle of least privilege through scoped permissions.
 * Restricts access to specific services and resource types.
 * Enforces encrypted HTTPS communication.
@@ -283,23 +288,12 @@ This implementation provides:
 
 ---
 
-## What I Learned
-
-* How Account SAS provides delegated access to Azure Storage resources.
-* The difference between Account SAS and User Delegation SAS.
-* Why Microsoft recommends User Delegation SAS where supported.
-* How to scope SAS permissions to specific resources.
-* How SAS expiry limits the risk of credential exposure.
-* Why Storage Account keys should never be shared.
-* How to generate and validate SAS tokens using both Azure Portal and Azure CLI.
-
----
-
 ## Key Notes
 
-* Shared Access Signatures provide temporary delegated access without exposing Storage Account keys.
-* Account SAS is signed using the Storage Account key.
-* User Delegation SAS is signed using Microsoft Entra ID credentials.
-* Applying least-privilege permissions significantly reduces security risk.
-* HTTPS-only access protects data in transit.
-* All sensitive values including SAS tokens, connection strings and SAS URLs were redacted before publishing this project.
+* Shared Access Signatures (SAS) provide temporary delegated access to Azure Storage resources without exposing Storage Account keys.
+* Account SAS tokens are signed using the Storage Account key.
+* User Delegation SAS tokens are signed using Microsoft Entra ID credentials and are the recommended approach where supported.
+* Applying least-privilege permissions reduces the security risks associated with delegated access.
+* HTTPS-only access helps protect data in transit.
+* SAS tokens should always have an appropriate expiry time to minimise the impact of credential exposure.
+* All sensitive values, including SAS tokens, connection strings and SAS URLs, were redacted before publishing this project.
