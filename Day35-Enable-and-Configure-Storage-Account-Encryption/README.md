@@ -4,11 +4,11 @@
 
 ## Overview
 
-In this challenge, I learned how to secure an Azure Storage Account using **Customer-Managed Keys (CMKs)** stored in Azure Key Vault.
+In this project, I configured an Azure Storage Account to use **Customer-Managed Keys (CMKs)** stored in Azure Key Vault.
 
-Rather than relying on the default Microsoft-managed encryption keys, I created an Azure Key Vault, generated a customer-managed RSA encryption key, enabled a system-assigned managed identity for the Storage Account, assigned the required Azure RBAC permissions, and configured the Storage Account to use the key stored in Azure Key Vault.
+Rather than relying on the default Microsoft-managed encryption keys, I created an Azure Key Vault, generated a customer-managed RSA encryption key, enabled a system-assigned managed identity for the Storage Account, assigned the required Azure RBAC permissions, and configured the Storage Account to use the encryption key stored in Azure Key Vault.
 
-This challenge demonstrates how Customer-Managed Keys provide organizations with greater control over encryption, key lifecycle management, auditing, and compliance while ensuring that Azure Storage data remains encrypted at rest.
+This project demonstrates how Customer-Managed Keys provide organisations with greater control over encryption, key lifecycle management, auditing and compliance while ensuring that Azure Storage data remains encrypted at rest.
 
 ---
 
@@ -38,24 +38,24 @@ This challenge demonstrates how Customer-Managed Keys provide organizations with
             Azure Storage Account
              stazure100days01
                        │
-      Customer-Managed Keys Enabled
-                       │
                        ▼
       System-Assigned Managed Identity
                        │
-          Authenticates to Key Vault
-                       │
+                       │  Azure RBAC
+                       │  Key Vault Crypto
+                       │  Service Encryption User
                        ▼
               Azure Key Vault
              kv-azure-100-days
                        │
+                       ▼
              storage-cmk-key (RSA)
                        │
-      Key Vault Crypto Service
-      Encryption User Role (RBAC)
+                       ▼
+        Cryptographic Operations
                        │
                        ▼
-           Encryption at Rest
+      Storage Data Encrypted at Rest
 ```
 
 ---
@@ -126,7 +126,7 @@ Status:
 Enabled
 ```
 
-This key will be used by the Storage Account instead of the default Microsoft-managed encryption key.
+This key is used by the Storage Account instead of the default Microsoft-managed encryption key.
 
 ---
 
@@ -156,7 +156,7 @@ The Storage Account automatically created a system-assigned managed identity to 
 
 ### Step 5 — Configure Azure RBAC Permissions
 
-Assigned the required Azure RBAC role to allow the Storage Account's managed identity to access the encryption key.
+Assigned the required Azure RBAC role to allow the Storage Account's managed identity to perform cryptographic operations using the customer-managed key.
 
 Configuration:
 
@@ -168,7 +168,7 @@ Assigned To:
 Storage Account System-assigned Managed Identity
 ```
 
-After Azure RBAC permissions propagated, the Storage Account successfully switched from Microsoft-managed keys to Customer-managed keys.
+After Azure RBAC permissions propagated, the Storage Account successfully switched from Microsoft-managed keys to Customer-Managed Keys.
 
 ---
 
@@ -185,7 +185,7 @@ az storage account show `
     --query "{KeySource:encryption.keySource, KeyVault:encryption.keyVaultProperties.keyVaultUri, KeyName:encryption.keyVaultProperties.keyName}"
 ```
 
-This confirmed that the Storage Account now references the customer-managed encryption key stored in Azure Key Vault.
+This confirmed that the Storage Account references the customer-managed encryption key stored in Azure Key Vault.
 
 ---
 
@@ -315,8 +315,8 @@ Validation confirmed:
 This implementation provides:
 
 * Eliminates reliance on Microsoft-managed encryption keys.
-* Gives organizations full ownership of encryption keys.
-* Supports centralized key lifecycle management through Azure Key Vault.
+* Gives organisations full ownership of encryption keys.
+* Supports centralised key lifecycle management through Azure Key Vault.
 * Uses a system-assigned managed identity instead of stored credentials.
 * Protects encryption keys with Soft Delete and Purge Protection.
 * Supports regulatory and compliance requirements for customer-controlled encryption.
@@ -324,23 +324,12 @@ This implementation provides:
 
 ---
 
-## What I Learned
-
-* How Azure Storage encrypts data at rest by default.
-* The difference between Microsoft-managed keys and Customer-Managed Keys.
-* How Azure Key Vault securely stores customer-managed encryption keys.
-* How System-Assigned Managed Identities authenticate securely to Azure Key Vault.
-* How Azure RBAC controls access to cryptographic operations.
-* How Customer-Managed Keys improve security, compliance, and key lifecycle management.
-* How to validate Storage Account encryption using Azure CLI.
-
----
-
 ## Key Notes
 
 * Azure Storage is encrypted at rest by default using Microsoft-managed keys.
-* Customer-Managed Keys allow organizations to control their own encryption keys using Azure Key Vault.
+* Customer-Managed Keys allow organisations to control their own encryption keys using Azure Key Vault.
 * System-assigned managed identities eliminate the need to store credentials when accessing Azure Key Vault.
-* The Storage Account never stores the encryption key locally; Azure Key Vault performs the cryptographic operations.
+* Azure RBAC authorises the Storage Account's managed identity to perform cryptographic operations using the customer-managed key.
+* The encryption key never leaves Azure Key Vault; cryptographic operations are performed within the service.
 * Soft Delete and Purge Protection help prevent accidental or malicious deletion of encryption keys.
 * Azure CLI provides an effective method for validating Storage Account encryption settings.
