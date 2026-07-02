@@ -1,6 +1,6 @@
 # Day 35 — Enable and Configure Storage Account Encryption
 
-### Azure 100 Days of Cloud Challenge — Ali Aden
+### 100 Days of Azure Cloud Challenge — Ali Aden
 
 ## Overview
 
