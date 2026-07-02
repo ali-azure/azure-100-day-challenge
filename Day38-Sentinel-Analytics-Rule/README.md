@@ -1,16 +1,16 @@
-# Day 38 — Create a Sentinel Analytics Rule to Detect Suspicious Activity
+# Day 38 — Create a Microsoft Sentinel Analytics Rule to Detect Suspicious Activity
 
 ### Azure 100 Days of Cloud Challenge — Ali Aden
 
 ## Overview
 
-In this challenge, I created a **Scheduled Analytics Rule** in **Microsoft Sentinel** to automatically detect multiple failed Microsoft Entra ID sign-in attempts.
+In this challenge, I created a scheduled analytics rule in **Microsoft Sentinel** to automatically detect multiple failed Microsoft Entra ID sign-in attempts and generate a security incident for investigation.
 
-I configured a **Kusto Query Language (KQL)** query to identify users with three or more failed authentication attempts within one hour, scheduled the rule to execute hourly, configured automatic incident creation, and mapped the detection to the **MITRE ATT&CK** framework.
+I configured a custom Kusto Query Language (KQL) query to identify users with three or more failed sign-in attempts within one hour. The rule was scheduled to execute every hour, configured to automatically generate incidents, and mapped to the **MITRE ATT&CK Credential Access** tactic using the **Brute Force (Password Guessing)** technique.
 
-To validate the implementation, I generated multiple failed sign-in attempts using a dedicated test account, confirmed the events were successfully ingested into Microsoft Sentinel, and verified that the scheduled analytics rule automatically generated a security incident.
+To validate the implementation, I generated failed sign-in activity using a dedicated test account, confirmed that the events were ingested into Log Analytics, and verified that Microsoft Sentinel automatically created a security incident after the scheduled analytics rule executed.
 
-This challenge demonstrates how Microsoft Sentinel transforms collected security telemetry into actionable detections through analytics rules, enabling automated threat detection and incident creation.
+This challenge demonstrates how Microsoft Sentinel transforms collected log data into actionable security detections through scheduled analytics rules and automated incident generation.
 
 ---
 
@@ -19,10 +19,11 @@ This challenge demonstrates how Microsoft Sentinel transforms collected security
 - Microsoft Sentinel
 - Log Analytics Workspace
 - Microsoft Entra ID
-- Microsoft Entra ID Data Connector
+- Microsoft Sentinel Analytics Rules
+- Microsoft Sentinel Incidents
 - Kusto Query Language (KQL)
 - MITRE ATT&CK Framework
-- Azure Monitor
+- Azure Monitor Logs
 - Azure Portal
 
 ---
@@ -37,16 +38,13 @@ This challenge demonstrates how Microsoft Sentinel transforms collected security
 
 ### Step 1 — Create a Scheduled Analytics Rule
 
-Created a new **Scheduled Analytics Rule** within Microsoft Sentinel.
+Created a new scheduled analytics rule within Microsoft Sentinel.
 
 Configuration:
 
 ```text
 Rule Name:
 Detect Multiple Failed Sign-ins
-
-Rule Type:
-Scheduled
 
 Severity:
 Medium
@@ -55,13 +53,13 @@ Status:
 Enabled
 ```
 
-This rule continuously monitors Microsoft Entra ID authentication activity for suspicious sign-in behaviour.
+The rule was configured to detect suspicious authentication activity using Microsoft Entra ID sign-in logs.
 
 ---
 
 ### Step 2 — Configure the Detection Logic
 
-Configured the analytics rule using the following KQL query.
+Configured the analytics rule using a custom Kusto Query Language (KQL) query.
 
 Query:
 
@@ -73,37 +71,40 @@ SigninLogs
 | where FailedAttempts >= 3
 ```
 
-The query identifies users with three or more failed sign-in attempts from the same IP address within the previous hour.
+The query identifies users with three or more failed sign-in attempts within the previous hour.
 
 ---
 
-### Step 3 — Configure Query Scheduling
+### Step 3 — Configure Query Scheduling and Alert Generation
 
-Configured the analytics rule to execute automatically.
+Configured how frequently Microsoft Sentinel evaluates the detection query.
 
 Configuration:
 
 ```text
-Run Query:
-Every 1 Hour
+Run Query Every:
+1 Hour
 
 Lookup Data:
 Previous 1 Hour
 
 Alert Threshold:
-Greater Than 0 Results
+Greater than 0 Results
 
 Event Grouping:
-Group All Events Into A Single Alert
+Group all events into a single alert
+
+Suppression:
+Disabled
 ```
 
-This configuration ensures Microsoft Sentinel continuously evaluates recent authentication activity.
+This configuration ensures that any matching activity generates a security alert.
 
 ---
 
 ### Step 4 — Configure Incident Settings
 
-Configured Microsoft Sentinel to automatically create incidents whenever the analytics rule generates an alert.
+Configured Microsoft Sentinel to automatically create incidents from generated alerts.
 
 Configuration:
 
@@ -114,135 +115,147 @@ Enabled
 Alert Grouping:
 Enabled
 
-Incident Correlation:
-Enabled
+Grouping Window:
+5 Hours
 ```
 
-This configuration allows related alerts to be grouped into a single security incident for investigation.
+This allows related alerts generated by the rule to be consolidated into a single incident for investigation.
 
 ---
 
-### Step 5 — Configure MITRE ATT&CK Mapping
+### Step 5 — Configure Alert Grouping and Incident Correlation
 
-Mapped the analytics rule to the MITRE ATT&CK framework.
+Configured how Microsoft Sentinel groups alerts and correlates incidents.
 
 Configuration:
 
 ```text
-Tactic:
-Credential Access
+Grouping Method:
+Group all alerts into a single incident
 
-Technique:
-Brute Force
+Re-open Closed Incidents:
+Disabled
 
-Sub-technique:
-Password Guessing (T1110.001)
+Incident Correlation:
+Enabled
 ```
 
-This provides standardized classification for detected authentication attacks.
+This configuration reduces alert noise while preserving the relationship between related security events.
 
 ---
 
-### Step 6 — Generate Failed Sign-in Activity
+### Step 6 — Deploy the Analytics Rule
 
-Generated multiple failed Microsoft Entra ID sign-in attempts using a dedicated test account by intentionally entering an incorrect password several times.
+Reviewed the configuration and successfully deployed the scheduled analytics rule.
 
-These authentication failures were successfully ingested into Microsoft Sentinel through the existing Microsoft Entra ID Data Connector.
+Deployment Result:
 
----
+```text
+Rule Status:
+Enabled
 
-### Step 7 — Validate Sign-in Events
+Rule Type:
+Scheduled
 
-Validated successful log ingestion by querying the **SigninLogs** table.
-
-Query:
-
-```kusto
-SigninLogs
-| where ResultType != 0
-| where TimeGenerated > ago(30m)
-| where UserPrincipalName == "testuser@deploywithadenhotmail.onmicrosoft.com"
-| project TimeGenerated, UserPrincipalName, IPAddress, ResultDescription
-| order by TimeGenerated desc
+Detection:
+Detect Multiple Failed Sign-ins
 ```
 
-The query returned multiple failed authentication events, confirming that Microsoft Sentinel had successfully received the required security telemetry.
+The rule became active and began running automatically according to the configured schedule.
 
 ---
 
-### Step 8 — Validate Security Incident Creation
+### Step 7 — Generate Failed Sign-in Activity
 
-After the scheduled analytics rule executed, Microsoft Sentinel automatically generated a security incident.
+Generated failed Microsoft Entra ID sign-in attempts using a dedicated test account.
 
-The generated incident confirmed that:
+Test Account:
 
-- The analytics rule executed successfully.
-- Failed sign-in attempts matched the detection logic.
-- A security alert was generated.
-- Microsoft Sentinel automatically created an incident for investigation.
+```text
+testuser@deploywithadenhotmail.onmicrosoft.com
+```
+
+Multiple incorrect passwords were intentionally entered to generate authentication failures that matched the analytics rule criteria.
+
+---
+
+### Step 8 — Validate Detection and Incident Generation
+
+Validated the implementation after the scheduled analytics rule executed.
+
+Validation included:
+
+- Confirming failed sign-in events within Log Analytics.
+- Verifying that the analytics rule detected the activity.
+- Confirming that Microsoft Sentinel automatically generated a security incident.
+
+This demonstrated the complete detection lifecycle from authentication event to security incident.
 
 ---
 
 ## Validation
 
-### Validation 1 — Analytics Rule Configuration
+### Validation 1 — General Rule Configuration
 
-Verified that the Scheduled Analytics Rule was successfully created.
+Verified the general configuration of the scheduled analytics rule before defining the detection logic.
 
 Confirmed:
 
-- Rule created
-- Scheduled rule type
-- Enabled
+- Analytics rule named **Detect Multiple Failed Sign-ins**.
+- Rule description configured.
+- Severity set to **Medium**.
+- MITRE ATT&CK mapping configured.
+- Rule status set to **Enabled**.
 
 **Screenshot:**
 
-![Analytics Rule Configuration](screenshots/01-create-scheduled-analytics-rule.png)
+![General Rule Configuration](screenshots/01-scheduled-query-rule-general.png)
 
 ---
 
-### Validation 2 — General Rule Configuration
+### Validation 2 — Rule Logic Configuration
 
-Verified the analytics rule configuration.
+Verified the detection logic and query scheduling for the scheduled analytics rule.
 
 Confirmed:
 
-- Rule name
-- Medium severity
-- MITRE ATT&CK mapping
-- Rule enabled
+- KQL detection query configured.
+- Query scheduled to run every **1 hour**.
+- Lookup period configured for the previous **1 hour**.
+- Automatic execution enabled.
+- Results simulation available for validation.
 
 **Screenshot:**
 
-![General Rule Configuration](screenshots/02-general-rule-configuration.png)
+![Rule Logic Configuration](screenshots/02-scheduled-query-rule-logic.png)
 
 ---
 
-### Validation 3 — Detection Logic and Scheduling
+### Validation 3 — Alert Threshold and Event Grouping
 
-Verified the configured KQL query and execution schedule.
+Verified the alert generation behaviour for the scheduled analytics rule.
 
 Confirmed:
 
-- Detection query configured
-- Hourly execution schedule
-- Alert threshold configured
+- Alert threshold configured to trigger when query results are greater than **0**.
+- Events grouped into a single alert.
+- Query suppression disabled.
 
 **Screenshot:**
 
-![Detection Logic and Scheduling](screenshots/03-rule-query-and-scheduling.png)
+![Alert Threshold and Event Grouping](screenshots/03-alert-threshold-and-event-grouping.png)
 
 ---
 
-### Validation 4 — Incident Configuration
+### Validation 4 — Incident Settings Configuration
 
-Verified automatic incident creation settings.
+Verified that Microsoft Sentinel was configured to automatically create incidents from analytics rule alerts.
 
 Confirmed:
 
-- Incident creation enabled
-- Alert grouping enabled
-- Incident correlation enabled
+- Automatic incident creation enabled.
+- Alert grouping into incidents enabled.
+- Alert grouping time window configured to **5 hours**.
 
 **Screenshot:**
 
@@ -250,30 +263,33 @@ Confirmed:
 
 ---
 
-### Validation 5 — Analytics Rule Created
+### Validation 5 — Alert Grouping and Incident Correlation
 
-Verified that the analytics rule was successfully deployed.
+Verified the incident grouping and correlation configuration for the scheduled analytics rule.
 
 Confirmed:
 
-- Rule successfully created
-- Available within Microsoft Sentinel
+- Alerts configured to be grouped into a single incident.
+- Re-open closed matching incidents disabled.
+- Incident correlation enabled.
 
 **Screenshot:**
 
-![Analytics Rule Created](screenshots/05-rule-created-successfully.png)
+![Alert Grouping and Incident Correlation](screenshots/05-alert-grouping-and-incident-correlation.png)
 
 ---
 
-### Validation 6 — Analytics Rule Enabled
+### Validation 6 — Analytics Rule Deployment
 
-Verified that the analytics rule was enabled.
+Verified that the scheduled analytics rule was successfully created and enabled in Microsoft Sentinel.
 
 Confirmed:
 
-- Rule enabled
-- Scheduled execution
-- MITRE ATT&CK mapping displayed
+- Scheduled analytics rule created successfully.
+- Rule status set to **Enabled**.
+- Rule visible in the **Analytics** blade.
+- MITRE ATT&CK mapping applied.
+- Detection rule ready for scheduled execution.
 
 **Screenshot:**
 
@@ -281,22 +297,26 @@ Confirmed:
 
 ---
 
-### Validation 7 — Failed Sign-in Activity
+### Validation 7 — Detection Query Validation
 
-Validated successful ingestion of failed authentication events.
+Validated that failed Microsoft Entra ID sign-in events matching the analytics rule were successfully recorded in Log Analytics.
 
 Query:
 
 ```kusto
 SigninLogs
+| where TimeGenerated > ago(30m)
 | where ResultType != 0
+| where UserPrincipalName == "testuser@deploywithadenhotmail.onmicrosoft.com"
+| project TimeGenerated, UserPrincipalName, IPAddress, ResultDescription
+| order by TimeGenerated desc
 ```
 
 Confirmed:
 
-- Failed sign-in events received
-- Microsoft Entra ID Data Connector operational
-- Analytics rule had matching events available
+- Failed sign-in events successfully ingested.
+- Detection query returned matching authentication failures.
+- Test user activity available for analytics rule evaluation.
 
 **Screenshot:**
 
@@ -304,16 +324,17 @@ Confirmed:
 
 ---
 
-### Validation 8 — Security Incident Generated
+### Validation 8 — Security Incident Generation
 
-Verified that Microsoft Sentinel automatically generated a security incident after the scheduled analytics rule executed.
+Verified that the scheduled analytics rule successfully detected the failed sign-in activity and automatically generated a Microsoft Sentinel security incident.
 
 Confirmed:
 
-- Security incident created
-- Medium severity
-- Credential Access detection
-- Analytics rule successfully triggered
+- Scheduled analytics rule executed successfully.
+- Failed sign-in activity triggered the detection rule.
+- Microsoft Sentinel automatically created a security incident.
+- Incident severity set to **Medium**.
+- Incident categorised as **Credential Access**.
 
 **Screenshot:**
 
@@ -325,21 +346,22 @@ Confirmed:
 
 This implementation provides:
 
-- Automated detection of repeated failed Microsoft Entra ID sign-in attempts.
-- Continuous monitoring using scheduled KQL queries.
-- Automatic security alert generation without manual log review.
-- Automatic incident creation for security investigation.
-- Standardized threat classification using the MITRE ATT&CK framework.
-- Improved visibility into suspicious authentication activity.
-- A foundation for future automation, playbooks, and advanced threat detection within Microsoft Sentinel.
+- Automated detection of suspicious authentication activity using Microsoft Sentinel.
+- Continuous monitoring of Microsoft Entra ID sign-in events through scheduled analytics rules.
+- Automatic generation of security incidents for analyst investigation.
+- Alignment with the MITRE ATT&CK framework for threat classification.
+- Reduced manual monitoring through scheduled KQL query execution.
+- Centralised investigation of authentication-based security events.
+- A scalable detection foundation that can be extended with additional analytics rules and automation.
 
 ---
 
 ## Key Notes
 
-- Microsoft Sentinel analytics rules continuously evaluate collected security data using scheduled KQL queries.
-- Detection rules only generate alerts when the configured query returns matching results.
-- MITRE ATT&CK mappings provide standardized classification for detected attack techniques.
-- Automatic incident creation reduces manual effort and accelerates security investigations.
-- Analytics rules execute according to their configured schedule, meaning detections may not occur immediately after events are generated.
-- Validating analytics rules using controlled failed sign-in attempts is an effective way to test detections in a lab or portfolio environment before deploying similar logic in production.
+- Microsoft Sentinel Analytics Rules transform log data into actionable security detections.
+- Scheduled analytics rules use Kusto Query Language (KQL) to identify suspicious activity.
+- The rule executes every hour and analyses the previous hour of sign-in activity.
+- A threshold of three failed sign-in attempts was intentionally selected for this lab environment to simplify validation.
+- Automatic incident creation allows Microsoft Sentinel to immediately surface suspicious activity for investigation.
+- Mapping the rule to the MITRE ATT&CK framework improves threat classification and investigation context.
+- Successful validation was demonstrated by generating failed sign-in attempts with a dedicated test account, confirming matching events in Log Analytics, and verifying automatic incident creation in Microsoft Sentinel.
