@@ -1,6 +1,6 @@
 # Day 37 — Deploy Microsoft Sentinel and Connect Your First Data Source
 
-### Azure 100 Days of Cloud Challenge — Ali Aden
+### 100 Days of Azure Cloud Challenge — Ali Aden
 
 ## Overview
 
