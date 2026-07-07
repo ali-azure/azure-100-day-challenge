@@ -22,7 +22,6 @@ This challenge demonstrates how Microsoft Sentinel and KQL work together to tran
 - SigninLogs
 - Kusto Query Language (KQL)
 - Azure Monitor Logs
-- Azure Portal
 
 ---
 
