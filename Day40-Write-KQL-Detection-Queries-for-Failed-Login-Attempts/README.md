@@ -22,12 +22,43 @@ This challenge demonstrates how Microsoft Sentinel and KQL work together to tran
 - SigninLogs
 - Kusto Query Language (KQL)
 - Azure Monitor Logs
+- Azure Portal
 
 ---
 
 ## Architecture Diagram
 
-![KQL Failed Login Detection Architecture](diagram/day40-kql-failed-login-detection-architecture.png)
+```text
+                  Microsoft Entra ID
+                 (Failed Sign-in Logs)
+                           │
+                           ▼
+                     SigninLogs Table
+                           │
+                           ▼
+                 Log Analytics Workspace
+                  law-monitoring-lab
+                           │
+                           ▼
+                  Microsoft Sentinel
+                           │
+        ┌──────────────────┼──────────────────┐
+        │                  │                  │
+        ▼                  ▼                  ▼
+  Basic Failed      Failed Login       Brute Force
+  Login Query       Summary            Detection
+ (24 Hours)         by User            by IP Address
+        │                  │                  │
+        └──────────────────┼──────────────────┘
+                           │
+                           ▼
+               Failed Login Timeline
+                (render timechart)
+                           │
+                           ▼
+             Saved KQL Detection Query
+         "Failed Login Detection - Brute Force"
+```
 
 ---
 
@@ -158,7 +189,7 @@ Confirmed:
 
 **Screenshot:**
 
-![Failed Login Summary](screenshots/02-failed-login-count-by-user.png)
+![Failed Login Summary](screenshots/02-failed-attempts-per-user.png)
 
 ---
 
@@ -190,7 +221,7 @@ Confirmed:
 
 **Screenshot:**
 
-![Failed Login Timeline](screenshots/04-failed-login-timeline-chart.png)
+![Failed Login Timeline](screenshots/04-failed-login-timechart.png)
 
 ---
 
