@@ -112,8 +112,6 @@ The selected policy audits Storage Accounts that allow unrestricted public netwo
 
 ### Built-in Policy
 
-![Built-in Azure Policy](screenshots/01-storage-policy-definition.png)
-
 The output confirms:
 
 - Built-in Azure Policy located
@@ -139,8 +137,6 @@ Succeeded
 
 ### Resource Group Validation
 
-![Resource Group Validation](screenshots/02-resource-group-list.png)
-
 The Resource Group was successfully located and ready to receive the policy assignment.
 
 ---
@@ -152,8 +148,6 @@ After confirming the Resource Group, I assigned the built-in Azure Policy using 
 This created a policy assignment that applies the policy to every supported resource inside the Resource Group.
 
 ### Policy Assignment
-
-![Policy Assignment](screenshots/03-policy-assignment-created.png)
 
 The assignment confirms:
 
@@ -178,8 +172,6 @@ Azure evaluated each Storage Account inside the Resource Group and reported whet
 
 ### Compliance Results
 
-![Compliance Results](screenshots/04-policy-compliance-results.png)
-
 The evaluation confirms:
 
 ```text
@@ -199,8 +191,6 @@ This confirmed that Azure Policy was successfully evaluating resources against t
 Finally, I listed the Azure Policy assignments using Azure CLI to confirm that the policy had been successfully deployed.
 
 ### Azure CLI Validation
-
-![Azure CLI Validation](screenshots/05-policy-assignments-list.png)
 
 The output confirms:
 

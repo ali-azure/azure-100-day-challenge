@@ -103,8 +103,6 @@ Before running any scripts, I confirmed that my Azure Virtual Machine was runnin
 
 ### Virtual Machine Overview
 
-![Virtual Machine Overview](screenshots/01-vm-overview-running.png)
-
 This confirmed:
 
 - The virtual machine was running.
@@ -120,8 +118,6 @@ I created and executed a PowerShell script to stop the virtual machine.
 Using PowerShell allowed me to automate the task instead of manually stopping the virtual machine through the Azure Portal.
 
 ### PowerShell Script Execution
-
-![Stop VM Script](screenshots/02-stop-vm-script-success.png)
 
 The output confirms:
 
@@ -144,8 +140,6 @@ After running the script, I checked the Azure Portal to confirm that the virtual
 
 ### Azure Portal Validation
 
-![VM Deallocated](screenshots/03-vm-deallocated-portal.png)
-
 This confirmed that the PowerShell script successfully stopped and deallocated the virtual machine.
 
 ---
@@ -157,8 +151,6 @@ Next, I created a PowerShell script to automatically apply resource tags to the 
 The script retrieved the virtual machine and used the **Merge** operation to add new tags without removing any existing ones.
 
 ### PowerShell Tagging Script
-
-![Tagging Script](screenshots/04-tag-vm-script-success.png)
 
 The script successfully applied the following tags:
 
@@ -177,8 +169,6 @@ Owner = Ali
 Finally, I checked the Azure Portal to confirm that the tags had been successfully applied.
 
 ### Azure Portal Validation
-
-![Resource Tags](screenshots/05-vm-tags-azure-portal.png)
 
 The portal confirmed that all three tags had been added to the virtual machine.
 

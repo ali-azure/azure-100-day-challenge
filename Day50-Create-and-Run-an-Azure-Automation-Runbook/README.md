@@ -118,8 +118,6 @@ The Automation Account provides a central location for managing runbooks, schedu
 
 I confirmed that the Automation Account was successfully deployed.
 
-![Automation Account Overview](screenshots/01-automation-account-overview.png)
-
 The overview confirms:
 
 - Automation Account created
@@ -134,8 +132,6 @@ The overview confirms:
 To allow the runbook to authenticate securely to Azure, I enabled the System Assigned Managed Identity for the Automation Account.
 
 Unlike traditional authentication methods, Managed Identities remove the need to store usernames, passwords or service principal secrets inside scripts.
-
-![System Assigned Managed Identity](screenshots/02-system-assigned-managed-identity.png)
 
 The configuration confirms:
 
@@ -163,8 +159,6 @@ rg-azure-100-days
 
 I assigned the role at the Resource Group level rather than the Subscription level by following the principle of least privilege. The runbook only needs permission to read resources within this lab environment.
 
-![Reader Role Assignment](screenshots/03-reader-role-assignment.png)
-
 The role assignment confirms:
 
 - Reader role
@@ -184,8 +178,6 @@ Connect-AzAccount -Identity
 ```
 
 The script then performs an inventory of the Azure resources and writes the results to the output stream.
-
-![Runbook Script Saved](screenshots/04-runbook-script-saved.png)
 
 The runbook was successfully saved and prepared for testing before publication.
 
