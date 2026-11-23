@@ -219,20 +219,20 @@ This confirmed that the Storage Account had returned to compliance after the rem
 
 ## Screenshots
 
-The following screenshots show the steps I completed and the results from the Azure environment.
+The following screenshots provide evidence of the practical work completed and the results from the Azure environment.
 
 | Screenshot | Description |
 |---|---|
-| 01-Azure-Environment.png | Existing Azure resources and resource group |
-| 02-Policy-Assignment.png | Day 65 Azure Policy assignment |
-| 03-Initial-Compliance.png | Initial policy compliance check |
-| 04-Diagnostic-Setting-Before-Remediation.png | Original diagnostic setting |
-| 05-Diagnostic-Setting-Removed.png | Diagnostic setting temporarily removed |
-| 06-Initial-NonCompliance.png | Storage Account identified as NonCompliant |
-| 07-Remediation-Task-Created.png | Remediation task creation |
-| 08-Remediation-Succeeded.png | Successful remediation results |
-| 09-Diagnostic-Setting-Restored.png | Diagnostic setting restored |
-| 10-Final-Compliance.png | Final Compliant policy result |
+| [01-Azure-Environment.png](screenshots/01-Azure-Environment.png) | Existing Azure resources and resource group |
+| [02-Policy-Assignment.png](screenshots/02-Policy-Assignment.png) | Day 65 Azure Policy assignment |
+| [03-Initial-Compliance.png](screenshots/03-Initial-Compliance.png) | Initial policy compliance check |
+| [04-Diagnostic-Setting-Before-Remediation.png](screenshots/04-Diagnostic-Setting-Before-Remediation.png) | Original diagnostic setting configuration |
+| [05-Diagnostic-Setting-Removed.png](screenshots/05-Diagnostic-Setting-Removed.png) | Diagnostic setting temporarily removed |
+| [06-Initial-NonCompliance.png](screenshots/06-Initial-NonCompliance.png) | Storage Account identified as NonCompliant |
+| [07-Remediation-Task-Created.png](screenshots/07-Remediation-Task-Created.png) | Remediation task creation |
+| [08-Remediation-Succeeded.png](screenshots/08-Remediation-Succeeded.png) | Successful remediation results |
+| [09-Diagnostic-Setting-Restored.png](screenshots/09-Diagnostic-Setting-Restored.png) | Diagnostic setting successfully restored |
+| [10-Final-Compliance.png](screenshots/10-Final-Compliance.png) | Final Compliant policy result |
 
 ## Lessons Learned
 
