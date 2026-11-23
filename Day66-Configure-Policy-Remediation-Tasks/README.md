@@ -13,7 +13,7 @@ After removing the setting, I triggered an Azure Policy compliance scan. Azure i
 
 I then created a remediation task using Azure CLI in Windows PowerShell. Azure Policy used the policy assignment's system-assigned managed identity to restore the missing diagnostic setting.
 
-Finally, I ran another compliance scan and confirmed that the Storage Account had returned to a Compliant state.
+Finally, I ran another compliance scan and confirmed that the Storage Account had returned to a Compliant state. 
 
 ## Architecture
 
